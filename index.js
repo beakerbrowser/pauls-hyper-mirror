@@ -62,7 +62,7 @@ async function readDb (indexDrive) {
     const str = await indexDrive.promises.readFile('/drives.json', 'utf8').catch(e => '')
     return new Set(JSON.parse(str))
   } catch (e) {
-    return []
+    return new Set()
   }
 }
 

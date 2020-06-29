@@ -1,7 +1,7 @@
 {
-  "name": "beaker-cohoster",
+  "name": "beaker-seeder",
   "version": "1.0.0",
-  "description": "A cohosting service for everything in the beaker index",
+  "description": "A simple seeding servce",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
