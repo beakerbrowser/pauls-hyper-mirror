@@ -1,0 +1,16 @@
+{
+  "name": "beaker-cohoster",
+  "version": "1.0.0",
+  "description": "A cohosting service for everything in the beaker index",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul Frazee <pfrazee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "hyperdrive": "git+https://github.com/hypercore-protocol/hyperdrive#hyperspace-port",
+    "hyperspace": "github:hyperspace-org/hyperspace#master"
+  }
+}
