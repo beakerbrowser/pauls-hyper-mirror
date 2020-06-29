@@ -1,7 +1,7 @@
 {
-  "name": "beaker-seeder",
+  "name": "pauls-hyper-mirror",
   "version": "1.0.0",
-  "description": "A simple seeding servce",
+  "description": "A simple hyper:// mirror servce",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

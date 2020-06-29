@@ -14,25 +14,25 @@ async function main () {
   process.once('SIGTERM', cleanup)
 
   hserver = new HyperspaceServer({
-    host: 'beaker-seeder-hyperspace',
+    host: 'pauls-hyper-mirror-hyperspace',
     storage: './.data'
   })
   await hserver.ready()
 
-  hclient = new HyperspaceClient({ host: 'beaker-seeder-hyperspace' })
+  hclient = new HyperspaceClient({ host: 'pauls-hyper-mirror-hyperspace' })
   await hclient.ready()
 
   var indexDrive = await loadDrive(hclient, process.argv[2])
   var activeDrives = {}
 
-  console.log('Beaker Seeder')
+  console.log('Paul\'s Hyper Mirror')
   console.log(`Source: ${process.argv[2]}`)
   console.log('')
   console.log('---')
   console.log('')
 
   while (true) {
-    console.log('Seeder tick', (new Date()).toLocaleString())
+    console.log('Mirror tick', (new Date()).toLocaleString())
     try {
       var urls = await readDb(indexDrive)
       console.log(urls.size, 'URLs found')
@@ -59,7 +59,7 @@ async function main () {
 
 async function readDb (indexDrive) {
   try {
-    const str = await indexDrive.promises.readFile('/drives.json', 'utf8').catch(e => '')
+    const str = await indexDrive.promises.readFile('/mirror.json', 'utf8').catch(e => '')
     return new Set(JSON.parse(str))
   } catch (e) {
     return new Set()
@@ -68,11 +68,11 @@ async function readDb (indexDrive) {
 
 async function loadDrive (hclient, url) {
   const key = urlToKey(url)
-  const userDrive = hyperdrive(hclient.corestore, key, {sparse: false, extension: false})
-  await userDrive.promises.ready()
-  await hclient.network.configure(userDrive.discoveryKey, { announce: true, lookup: true, flush: true })
+  const drive = hyperdrive(hclient.corestore, key, {sparse: false, extension: false})
+  await drive.promises.ready()
+  await hclient.network.configure(drive.discoveryKey, { announce: true, lookup: true, flush: true })
 
-  return userDrive
+  return drive
 }
 
 function urlToKey (url) {
